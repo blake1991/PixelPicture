@@ -120,8 +120,23 @@ def convert_to_pixelated(cropsize, img):
 
 
 def main():
-    img = Image.open("mercy.png")
-    stitched = convert_to_pixelated(1, img)
+    if sys.argv.__len__() <= 1:
+        # no picture was supplied. prompt for one
+        print("no pic")
+        path = input("Path to picture: ")
+        img = Image.open(path)
+    else:
+        # picture was supplied via drag drop
+        img = Image.open(sys.argv[1])
+
+    cropsize = input("Cropsize: ")
+    try:
+        cropsize = int(cropsize)
+    except ValueError:
+        print("Cropsize has to be an int.")
+        sys.exit(1)
+
+    stitched = convert_to_pixelated(cropsize, img)
     stitched.show()
 
 
