@@ -2,6 +2,7 @@ from PIL import Image
 import sys
 import tempfile
 
+
 def get_vertical_cropping(columnwidth, img):
     imglist = []
     left_upper_x = 0
