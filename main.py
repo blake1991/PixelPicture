@@ -1,6 +1,6 @@
 from PIL import Image
 import sys
-
+import tempfile
 
 def get_vertical_cropping(columnwidth, img):
     imglist = []
@@ -124,20 +124,24 @@ def main():
         # no picture was supplied. prompt for one
         print("no pic")
         path = input("Path to picture: ")
-        img = Image.open(path)
+        try:
+            img = Image.open(path)
+        except FileNotFoundError:
+            print("Could not find picture.")
+            sys.exit(1)
     else:
         # picture was supplied via drag drop
         img = Image.open(sys.argv[1])
 
-    cropsize = input("Cropsize: ")
+    cropsize = input("Crop size: ")
     try:
         cropsize = int(cropsize)
     except ValueError:
-        print("Cropsize has to be an int.")
+        print("Crop size has to be an int.")
         sys.exit(1)
 
     stitched = convert_to_pixelated(cropsize, img)
-    stitched.show()
+    stitched.save("{}.png".format(next(tempfile._get_candidate_names())))
 
 
 if __name__ == "__main__":
