@@ -1,4 +1,5 @@
 from PIL import Image
+import sys
 
 
 def get_vertical_cropping(columnwidth, img):
@@ -52,7 +53,7 @@ def get_horizontal_cropping(rowheight, img):
 
 def stitch_horizontal(imglist):
     if imglist.__len__() <= 0:
-        exit(1)
+        sys.exit(1)
 
     # for horizontal images
     stitch_width = imglist[0].width * 2
@@ -84,7 +85,7 @@ def stitch_horizontal(imglist):
 
 def stitch_vertical(imglist):
     if imglist.__len__() <= 0:
-        exit(1)
+        sys.exit(1)
 
     # vertical cropped
     stitch_height = (imglist[0].height * 2).__int__()
@@ -127,4 +128,4 @@ def main():
 if __name__ == "__main__":
     # call main function
     main()
-    exit(0)
+    sys.exit(0)
